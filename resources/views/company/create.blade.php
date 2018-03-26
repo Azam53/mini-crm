@@ -36,8 +36,8 @@
         </div>
 
         <div class="form-group">
-            <label>Product:</label>
-                 {!! Form::select('product_id', [], null, ['class' => 'form-control']) !!}
+            <label>Address:</label>
+                 {!! Form::textarea('address', [], null, ['class' => 'form-control']) !!}
             @if ($errors->has('body'))
                 <span class="text-danger">{{ $errors->first('body') }}</span>
             @endif
