@@ -16,14 +16,14 @@
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-building fa-fw"></i> Add Company Tab
+                            <i class="fa fa-building fa-fw"></i> Edit Company Tab
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8">
                                     
-    {!! Form::open(array('route' => 'company.store', 'class' => 'form', 'action' => 'post')) !!}
+     {!! Form::model($company,array('method' => 'PUT','route' => ['company.update', $company->id], 'class' => 'form')) !!}
 
 
         {{ csrf_field() }}

@@ -23,10 +23,12 @@ Route::get('testapi', [
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 // route for crm operations and protected by middleware for only registered user
 Route::group(['middleware' => 'auth.basic'], function()
 {
-     Route::resource('company', 'CompanyController');    
+	 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+     Route::resource('company', 'CompanyController'); 
+     Route::get('searchajax',array('as'=>'searchajax','uses'=>'CompanyController@autoComplete'));
+        
 });

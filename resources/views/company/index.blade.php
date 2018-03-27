@@ -8,6 +8,15 @@
                     <h1 class="page-header">Companies</h1>
                 </div>
                 <!-- /.col-lg-12 -->
+
+                @if(Session::has('success'))
+                    <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                    @php
+                    Session::forget('success');
+                    @endphp
+                    </div>
+                @endif
             </div>
 
             <div class="row">
@@ -37,11 +46,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                            @foreach($companies as $company)    
                                                 <tr>
-                                                    <td>3326</td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{ $company->id }}</td>
+                                                    <td>{{ $company->name }}</td>
+                                                    <td><span class="pull-left">
+                                                        {{ Form::open(['method' => 'GET','route' => ['company.edit', $company->id]]) }}
+                                                        {{ Form::submit('Edit', ['class' => 'btn btn-primary','title' => 'edit']) }}
+                                                        {{ Form::close() }}
+                                                        </span>
+                                                        <span class="pull-right">
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['company.destroy', $company->id]]) }}
+                                                        {{ Form::submit('Delete', ['class' => 'btn btn-danger','title' => 'delete']) }}
+                                                        {{ Form::close() }}
+                                                        <span>
+                                                    </td>
                                                 </tr>
+                                            @endforeach    
                                                
                                             </tbody>
                                         </table>

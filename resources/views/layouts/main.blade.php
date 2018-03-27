@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Refresh CRM</title>
 
@@ -25,6 +26,8 @@
 
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="http://demo.expertphp.in/css/jquery.ui.autocomplete.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Refresh CRM</a>
+                <a class="navbar-brand" href="{{url('dashboard')}}">Refresh CRM</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -313,6 +316,8 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.4/metisMenu.js"></script>
 
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
     <!-- Morris Charts JavaScript 
     <script src="../vendor/raphael/raphael.min.js"></script>
     <script src="/js/morris.min.js"></script>
@@ -320,6 +325,34 @@
 
     Custom Theme JavaScript -->
     <script src="/js/sb-admin-2.js"></script>
+
+    <script type="text/JavaScript">
+   
+                   $(document).ready(function() {
+                    src = "{{ route('searchajax') }}";
+                     $("#search_text").autocomplete({
+                        source: function(request, response) {
+                            $.ajax({
+                                url: src,
+                                type: 'GET',
+                                dataType: "json",
+                                data: {
+                                    term : request.term
+                                },
+                                headers: {
+                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                                },
+                                success: function(data) {
+                                    response(data);
+                                   
+                                }
+                            });
+                        },
+                        minLength: 3,
+                       
+                    });
+                  });
+    </script>
 
 </body>
 
