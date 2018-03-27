@@ -15,15 +15,15 @@ class UpdateUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->string('lastName');
-            $table->string('title');
-            $table->string('contactNumber');
-            $table->string('designation');
-            $table->enum('role', ['1', '2', '3']);
-            $table->enum('status', ['0', '1']);
+            $table->string('lastName')->nullable();
+            $table->string('title')->nullable();
+            $table->string('contactNumber')->nullable();
+            $table->string('designation')->nullable();
+            $table->enum('role', ['1', '2', '3'])->nullable();
+            $table->enum('status', ['0', '1'])->nullable();
 
             //adding foreign key
-            $table->integer('companyId')->unsigned(); 
+            $table->integer('companyId')->unsigned()->nullable(); 
             $table->index('companyId');   // adding index of companyId
             $table->foreign('companyId')->references('id')->on('companies')->onDelete('cascade'); // making companyId foreign from company table
 
