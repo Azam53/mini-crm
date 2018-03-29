@@ -256,7 +256,11 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -287,10 +291,10 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Services</a>
+                            <a href="{{url('service')}}"><i class="fa fa-table fa-fw"></i> Services</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
+                            <a href="#"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
                         </li>
                        
                         
@@ -301,6 +305,19 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+        <!-- 500 error meet -->
+
+         @if(Session::has('failed'))
+                 <div class="container">
+                    <div class="alert alert-danger">
+                           <strong>{{ Session::get('failed') }}</strong>
+                            @php
+                            Session::forget('failed');
+                            @endphp
+                    </div>
+                 </div>   
+         @endif
 
         @yield('content')
 

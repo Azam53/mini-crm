@@ -4,18 +4,29 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* It is a CRM for Refresh Media 
+* Version 1.0
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Clone from github in web root.
+
+* Run below command:
+      composer update
+
+* Edit .env file with your database credential i.e. username and password.
+
+* Generate key by the below command
+      php artisan key:generate
+
+* run migration via below command
+      php artisan migrate
+
+* run seeder if any check in commit
+      php artisan db:seed      
+
+* hit the below url in browser
+      http://localhost:8000/
 
 ### Contribution guidelines ###
 

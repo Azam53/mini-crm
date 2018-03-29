@@ -30,5 +30,9 @@ Route::group(['middleware' => 'auth.basic'], function()
 	 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
      Route::resource('company', 'CompanyController'); 
      Route::get('searchajax',array('as'=>'searchajax','uses'=>'CompanyController@autoComplete'));
+
+     //Services route
+      Route::resource('service', 'ServiceController'); 
+
         
 });
