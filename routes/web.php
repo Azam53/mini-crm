@@ -33,5 +33,6 @@ Route::group(['middleware' => 'auth.basic'], function()
 
      //Services route
       Route::resource('service', 'ServiceController'); 
+
         
 });

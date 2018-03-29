@@ -294,7 +294,7 @@
                             <a href="{{url('service')}}"><i class="fa fa-table fa-fw"></i> Services</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
+                            <a href="#"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
                         </li>
                        
                         

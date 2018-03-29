@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
+use Validator;
 
 class ServiceController extends Controller
 {
@@ -62,12 +63,18 @@ class ServiceController extends Controller
       try{
 
             //validation at server level
-            $this->validate($request, [
+           $validator = Validator::make($request->all(), [
                 'name' => 'required|min:5|max:15',
                 'price' => 'required',
                 'description' => 'required',
                 'rate' => 'required',
             ]);
+
+              if ($validator->fails()) {
+              return redirect()->back()
+                          ->withErrors($validator)
+                          ->withInput();
+              }
 
                   
             $input = $request->all();
@@ -97,6 +104,12 @@ class ServiceController extends Controller
                     'description' => 'required',
                     'rate' => 'required',
                 ]);
+
+                if ($validator->fails()) {
+                 return redirect()->back()
+                          ->withErrors($validator)
+                          ->withInput();
+                }
                    
                 $service = Service::find($id);   
                 $service->name = $request->get('name');

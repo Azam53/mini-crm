@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Country;
 use App\Company;
+use Validator;
 
 class CompanyController extends Controller
 {
@@ -62,8 +63,9 @@ class CompanyController extends Controller
     public function store(Request $request){
           
           try {
+
             //validation at server level
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'name' => 'required|min:5|max:15',
                 'address' => 'required',
                 'postalCode' => 'required',
@@ -74,7 +76,14 @@ class CompanyController extends Controller
                 'url' => 'required',
                 'bankNumber' => 'required|min:14|max:20',
             ]);  
-               
+             
+             if ($validator->fails()) {
+              return redirect()->back()
+                          ->withErrors($validator)
+                          ->withInput();
+              }
+
+
             $input = $request->all();
             $input['status'] = '1';
 
@@ -82,7 +91,7 @@ class CompanyController extends Controller
             return redirect('/company')->with('success','Company created successfully.');
 
           } catch(\Exception $e) {
-
+            throw new \Exception($e);
             return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
 
           }
@@ -97,7 +106,7 @@ class CompanyController extends Controller
         try {
 
                 //validation at server level
-                   $this->validate($request, [
+                        $validator = Validator::make($request->all(), [
                             'name' => 'required|min:5|max:15',
                             'address' => 'required',
                             'postalCode' => 'required',
@@ -107,7 +116,13 @@ class CompanyController extends Controller
                             'email' => 'required|min:5|max:15',
                             'url' => 'required',
                             'bankNumber' => 'required|min:14|max:20',
-                        ]);  
+                        ]); 
+
+                        if ($validator->fails()) {
+                          return redirect()->back()
+                                      ->withErrors($validator)
+                                      ->withInput();
+                          } 
 
                     $company = Company::find($id);   
                     $company->name = $request->get('name');
