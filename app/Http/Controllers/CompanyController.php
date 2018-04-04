@@ -72,7 +72,7 @@ class CompanyController extends Controller
                 'province' => 'required',
                 'country' => 'required',
                 'contactNumber' => 'required|min:9|max:10',
-                'email' => 'required|min:5|max:15|unique:companies',
+                'email' => 'required|min:5|max:60|email|unique:companies,email',
                 'url' => 'required',
                 'bankNumber' => 'required|min:14|max:20',
             ]);  
