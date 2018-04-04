@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     
-    {!! Form::open(array('route' => 'company.store', 'class' => 'form', 'action' => 'post')) !!}
+    {!! Form::open(array('route' => 'company.store', 'class' => 'form', 'action' => 'post' ,'autocomplete' => 'off')) !!}
 
 
         {{ csrf_field() }}

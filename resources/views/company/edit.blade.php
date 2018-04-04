@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     
-     {!! Form::model($company,array('method' => 'PUT','route' => ['company.update', $company->id], 'class' => 'form')) !!}
+ {!! Form::model($company,array('method' => 'PUT','route' => ['company.update', $company->id], 'class' => 'form','autocomplete' => 'off')) !!}
 
 
         {{ csrf_field() }}
