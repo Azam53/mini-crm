@@ -294,7 +294,7 @@
                             <a href="{{url('service')}}"><i class="fa fa-table fa-fw"></i> Services</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
+                            <a href="{{url('subscription')}}"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
                         </li>
                        
                         
@@ -368,7 +368,67 @@
                         minLength: 3,
                        
                     });
+             
                   });
+
+                   $(document).ready(function() {
+                    urlCompany = "{{ route('searchcompany') }}";
+                     $("#search_company").autocomplete({
+                        source: function(request, response) {
+                            $.ajax({
+                                url: urlCompany,
+                                type: 'GET',
+                                dataType: "json",
+                                data: {
+                                    term : request.term
+                                },
+                                headers: {
+                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                                },
+                                success: function(data) {
+                                    response(data);
+                                   
+                                }
+                            });
+                        },
+                        minLength: 3,
+                       
+                    });
+             
+                  }); 
+
+                   $(document).ready(function() {
+                    urlService = "{{ route('searchservice') }}";
+                     $("#search_service").autocomplete({
+                        source: function(request, response) {
+                            $.ajax({
+                                url: urlService,
+                                type: 'GET',
+                                dataType: "json",
+                                data: {
+                                    term : request.term
+                                },
+                                headers: {
+                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                                },
+                                success: function(data) {
+                                    response(data);
+                                   
+                                }
+                            });
+                        },
+                        minLength: 3,
+                       
+                    });
+             
+                  }); 
+
+                   // date picker
+
+                   $(function() {
+                        $( "#datepicker_start" ).datepicker();
+                        $( "#datepicker_end" ).datepicker();
+                    }); 
     </script>
 
 </body>

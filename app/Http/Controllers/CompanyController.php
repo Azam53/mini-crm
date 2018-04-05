@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Country;
 use App\Company;
+use App\Http\Requests\StoreCompany;
 use Validator;
 
 class CompanyController extends Controller
@@ -19,6 +21,8 @@ class CompanyController extends Controller
 
 
        }  catch(\Exception $e) {
+
+            Log::info('Company list page ');
 
             return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
 
@@ -60,32 +64,12 @@ class CompanyController extends Controller
     }
 
    // function for creating new companies
-    public function store(Request $request){
+    public function store(StoreCompany $request){
           
           try {
 
-            //validation at server level
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|min:5|max:15',
-                'address' => 'required',
-                'postalCode' => 'required',
-                'province' => 'required',
-                'country' => 'required',
-                'contactNumber' => 'required|min:9|max:10',
-                'email' => 'required|min:5|max:60|email|unique:companies,email',
-                'url' => 'required',
-                'bankNumber' => 'required|min:14|max:20',
-            ]);  
-             
-             if ($validator->fails()) {
-              return redirect()->back()
-                          ->withErrors($validator)
-                          ->withInput();
-              }
-
 
             $input = $request->all();
-            $input['status'] = '1';
 
             $company = Company::create($input);
             return redirect('/company')->with('success','Company created successfully.');
@@ -101,41 +85,14 @@ class CompanyController extends Controller
     }
 
      // function for updating existing companies
-    public function update(Request $request,$id){
+    public function update(StoreCompany $request,$id){
         
         try {
 
-                //validation at server level
-                        $validator = Validator::make($request->all(), [
-                            'name' => 'required|min:5|max:15',
-                            'address' => 'required',
-                            'postalCode' => 'required',
-                            'province' => 'required',
-                            'country' => 'required',
-                            'contactNumber' => 'required|min:9|max:10',
-                            'email' => 'required|min:5|max:15',
-                            'url' => 'required',
-                            'bankNumber' => 'required|min:14|max:20',
-                        ]); 
-
-                        if ($validator->fails()) {
-                          return redirect()->back()
-                                      ->withErrors($validator)
-                                      ->withInput();
-                          } 
-
                     $company = Company::find($id);   
-                    $company->name = $request->get('name');
-                    $company->address = $request->get('address');
-                    $company->postalCode   = $request->get('postalCode');
-                    $company->province = $request->get('province');
-                    $company->country  = $request->get('country');
-                    $company->contactNumber = $request->get('contactNumber');
-                    $company->email = $request->get('email');
-                    $company->url = $request->get('url');
-                    $company->bankNumber = $request->get('bankNumber') ;
-                    $company->status = '1';
-                    $company->save();
+                    $data = $request->toArray();
+                   
+                    $company->update($data);
                     
                     
                     return redirect('/company')->with('success','Company edited successfully.');
@@ -203,6 +160,40 @@ class CompanyController extends Controller
 		 
                   
 	}
+
+
+   // function for autocomplete company fill in subscription form
+     public function autoCompleteCompany(Request $request){
+        
+        try{
+
+            $query = $request->get('term');
+        
+            $companies=Company::where('name','LIKE','%'.$query.'%')
+                                 ->get();
+        
+            $data=array();
+            foreach ($companies as $company) {
+
+                    $data[]=array('name'=>$company->name,'value'=>$company->id);
+            }
+
+            if(count($data))
+                 return $data;
+            else
+                return ['value'=>'No Result Found','id'=>''];
+
+
+
+        } catch(\Exception $e) {
+
+                   return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+          } 
+
+      
+
+    }
 
 
 
