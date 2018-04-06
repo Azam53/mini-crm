@@ -11,7 +11,7 @@ class DashboardController extends Controller
 	// function for making the dashboard
     public function index(){
 
-       // to get the total of all entities in the system
+       // to get the total of all entities in the system 
     	     $companies = Company::count();
     	     $services  = Service::count();
     	     $subscription = 0;

@@ -31,8 +31,14 @@ Route::group(['middleware' => 'auth.basic'], function()
      Route::resource('company', 'CompanyController'); 
      Route::get('searchajax',array('as'=>'searchajax','uses'=>'CompanyController@autoComplete'));
 
+     //auto complete routes for service and company
+     Route::get('searchcompany',array('as'=>'searchcompany','uses'=>'CompanyController@autoCompleteCompany'));
+     Route::get('searchservice',array('as'=>'searchservice','uses'=>'ServiceController@autoCompleteService'));
+
      //Services route
-      Route::resource('service', 'ServiceController'); 
+     Route::resource('service', 'ServiceController'); 
+     //Subscription route
+     Route::resource('subscription', 'SubscriptionController');  
 
         
 });

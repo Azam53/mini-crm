@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
+use App\Http\Requests\StoreService;
 use Validator;
 
 class ServiceController extends Controller
@@ -58,25 +59,10 @@ class ServiceController extends Controller
     }
 
      // function for creating new services
-    public function store(Request $request){
+    public function store(StoreService $request){
 
       try{
-
-            //validation at server level
-           $validator = Validator::make($request->all(), [
-                'name' => 'required|min:5|max:15',
-                'price' => 'required',
-                'description' => 'required',
-                'rate' => 'required',
-            ]);
-
-              if ($validator->fails()) {
-              return redirect()->back()
-                          ->withErrors($validator)
-                          ->withInput();
-              }
-
-                  
+        
             $input = $request->all();
 
             $service = Service::create($input);
@@ -93,31 +79,13 @@ class ServiceController extends Controller
 
 
       // function for updating existing companies
-    public function update(Request $request,$id){
+    public function update(StoreService $request,$id){
           
         try{
-
-            //validation at server level
-                $this->validate($request, [
-                    'name' => 'required|min:5|max:15',
-                    'price' => 'required',
-                    'description' => 'required',
-                    'rate' => 'required',
-                ]);
-
-                if ($validator->fails()) {
-                 return redirect()->back()
-                          ->withErrors($validator)
-                          ->withInput();
-                }
                    
                 $service = Service::find($id);   
-                $service->name = $request->get('name');
-                $service->price = $request->get('price');
-                $service->description = $request->get('description');
-                $service->rate = $request->get('rate');
               
-                $service->save();
+                $service->update($request->toArray());
                 
                 
                 return redirect('/service')->with('success','Service edited successfully.');
@@ -149,4 +117,38 @@ class ServiceController extends Controller
       }
 
 	}
+
+
+  // function for autocomplete service fill in subscription form
+     public function autoCompleteService(Request $request){
+        
+        try{
+
+            $query = $request->get('term');
+        
+            $services=Service::where('serviceName','LIKE','%'.$query.'%')
+                                 ->get();
+        
+            $data=array();
+            foreach ($services as $service) {
+
+                    $data[]=array('name'=>$service->name,'value'=>$service->id);
+            }
+
+            if(count($data))
+                 return $data;
+            else
+                return ['value'=>'No Result Found','id'=>''];
+
+
+
+        } catch(\Exception $e) {
+
+                   return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+          } 
+
+      
+
+    }
 }

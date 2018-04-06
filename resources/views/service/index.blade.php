@@ -50,13 +50,13 @@
                                             @foreach($services as $service)    
                                                 <tr>
                                                     <td>{{ $service->id }}</td>
-                                                    <td>{{ $service->name }}</td>
-                                                    <td><span class="pull-left">
+                                                    <td>{{ $service->serviceName }}</td>
+                                                    <td><span class="pull-left service">
                                                         {{ Form::open(['method' => 'GET','route' => ['service.edit', $service->id]]) }}
                                                         {{ Form::submit('Edit', ['class' => 'btn btn-primary','title' => 'edit']) }}
                                                         {{ Form::close() }}
                                                         </span>
-                                                        <span class="pull-right">
+                                                        <span class="pull-left service">
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['service.destroy', $service->id]]) }}
                                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger','title' => 'delete']) }}
                                                         {{ Form::close() }}

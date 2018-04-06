@@ -28,7 +28,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label>Name:</label>
-                 {!! Form::text('name', null, ['class' => 'form-control','required','placeholder'=>'Enter service name']) !!}
+                 {!! Form::text('serviceName', null, ['class' => 'form-control','required','placeholder'=>'Enter service name']) !!}
             @if ($errors->has('name'))
                 <span class="text-danger">{{ $errors->first('name') }}</span>
             @endif

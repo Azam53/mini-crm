@@ -5,7 +5,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Companies</h1>
+                    <h1 class="page-header">Subscriptions</h1>
                 </div>
                 <!-- /.col-lg-12 -->
 
@@ -25,10 +25,10 @@
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-building fa-fw"></i> Company Tab
+                            <i class="fa fa-random fa-fw"></i> Subscription Tab
                             <div class="pull-right">
                                 <div class="btn-group">
-                                  <a href="{{url('company/create')}}"><button class="btn btn-info btn-xs " > Add Company </button></a>
+                                  <a href="{{url('subscription/create')}}"><button class="btn btn-info btn-xs " > Add Subscription </button></a>
                                 </div>
                             </div>
                         </div>
@@ -41,23 +41,31 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
+                                                    <th>Company </th>
+                                                    <th>Service </th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                            @foreach($companies as $company)    
+                                            @foreach($subsciptions as $subscription)    
                                                 <tr>
-                                                    <td>{{ $company->id }}</td>
-                                                    <td>{{ $company->name }}</td>
-                                                    <td><span class="pull-left company">
-                                                        {{ Form::open(['method' => 'GET','route' => ['company.edit', $company->id]]) }}
+                                                    <td>{{ $subscription->id }}</td>
+                                                    <td>{{ $subscription->name }}</td>
+                                                    <td>{{ $subscription->serviceName }}</td>
+                                                    <td><span class="pull-left subscription">
+                                                        {{ Form::open(['method' => 'GET','route' => ['subscription.edit', $subscription->id]]) }}
                                                         {{ Form::submit('Edit', ['class' => 'btn btn-primary','title' => 'edit']) }}
                                                         {{ Form::close() }}
                                                         </span>
-                                                        <span class="pull-left company">
-                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['company.destroy', $company->id]]) }}
+                                                        <span class="pull-left subscription">
+                                                        {{ Form::open(['method' => 'GET','route' => ['subscription.show', $subscription->id]]) }}
+                                                        {{ Form::submit('Details', ['class' => 'btn btn-primary','title' => 'details']) }}
+                                                        {{ Form::close() }}
+                                                        </span>
+                                                        
+                                                        <span class="pull-left subscription">
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['subscription.destroy', $subscription->id]]) }}
                                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger','title' => 'delete']) }}
                                                         {{ Form::close() }}
                                                         <span>
