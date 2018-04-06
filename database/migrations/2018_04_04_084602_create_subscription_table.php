@@ -36,6 +36,10 @@ class CreateSubscriptionTable extends Migration
             $table->timestamps();
 
         });
+
+        $query =  "ALTER TABLE `subscriptions` CHANGE `status` `status` ENUM('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1'";
+
+        \DB::statement($query);
     }
 
     /**

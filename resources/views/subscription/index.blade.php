@@ -41,7 +41,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Company Name</th>
+                                                    <th>Company </th>
+                                                    <th>Service </th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -51,12 +52,19 @@
                                                 <tr>
                                                     <td>{{ $subscription->id }}</td>
                                                     <td>{{ $subscription->name }}</td>
-                                                    <td><span class="pull-left">
+                                                    <td>{{ $subscription->serviceName }}</td>
+                                                    <td><span class="pull-left subscription">
                                                         {{ Form::open(['method' => 'GET','route' => ['subscription.edit', $subscription->id]]) }}
                                                         {{ Form::submit('Edit', ['class' => 'btn btn-primary','title' => 'edit']) }}
                                                         {{ Form::close() }}
                                                         </span>
-                                                        <span class="pull-right">
+                                                        <span class="pull-left subscription">
+                                                        {{ Form::open(['method' => 'GET','route' => ['subscription.show', $subscription->id]]) }}
+                                                        {{ Form::submit('Details', ['class' => 'btn btn-primary','title' => 'details']) }}
+                                                        {{ Form::close() }}
+                                                        </span>
+                                                        
+                                                        <span class="pull-left subscription">
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['subscription.destroy', $subscription->id]]) }}
                                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger','title' => 'delete']) }}
                                                         {{ Form::close() }}

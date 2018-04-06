@@ -18,7 +18,7 @@ class SubscriptionController extends Controller
 
             $subsciptions = Subscription::join('companies', 'companies.id', '=', 'subscriptions.companyId')
                                         ->join('services', 'services.id', '=', 'subscriptions.serviceId')
-                                        ->select('subscriptions.*','services.name','companies.name')
+                                        ->select('subscriptions.*','services.serviceName','companies.name')
                                         ->get();
           //  dd($subsciptions);                            
 
@@ -37,9 +37,9 @@ class SubscriptionController extends Controller
     public function create(){
 
         try{
-                $services   = Service::pluck('name','id');
+               
 
-            return view('subscription.create')->with('services',$services);
+            return view('subscription.create');
 
         }catch(\Exception $e) {
 
@@ -47,6 +47,28 @@ class SubscriptionController extends Controller
 
       }
 
+    }
+
+     public function show($id){
+
+        try{
+
+            $subscription = Subscription::join('companies', 'companies.id', '=', 'subscriptions.companyId')
+                                        ->join('services', 'services.id', '=', 'subscriptions.serviceId')
+                                        ->select('subscriptions.*','services.*','companies.*')
+                                        ->where('subscriptions.id',$id)
+                                        ->get();
+
+          //  dd($subscription);
+
+            return view('subscription.details')->with('subscription',$subscription);
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+      }
+        
     }
 
 

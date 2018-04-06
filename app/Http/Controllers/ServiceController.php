@@ -126,7 +126,7 @@ class ServiceController extends Controller
 
             $query = $request->get('term');
         
-            $services=Service::where('name','LIKE','%'.$query.'%')
+            $services=Service::where('serviceName','LIKE','%'.$query.'%')
                                  ->get();
         
             $data=array();

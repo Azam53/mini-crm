@@ -51,12 +51,12 @@
                                                 <tr>
                                                     <td>{{ $company->id }}</td>
                                                     <td>{{ $company->name }}</td>
-                                                    <td><span class="pull-left">
+                                                    <td><span class="pull-left company">
                                                         {{ Form::open(['method' => 'GET','route' => ['company.edit', $company->id]]) }}
                                                         {{ Form::submit('Edit', ['class' => 'btn btn-primary','title' => 'edit']) }}
                                                         {{ Form::close() }}
                                                         </span>
-                                                        <span class="pull-right">
+                                                        <span class="pull-left company">
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['company.destroy', $company->id]]) }}
                                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger','title' => 'delete']) }}
                                                         {{ Form::close() }}
