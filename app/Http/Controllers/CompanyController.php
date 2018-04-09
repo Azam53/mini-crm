@@ -72,6 +72,7 @@ class CompanyController extends Controller
             $input = $request->all();
 
             $company = Company::create($input);
+
             return redirect('/company')->with('success','Company created successfully.');
 
           } catch(\Exception $e) {
