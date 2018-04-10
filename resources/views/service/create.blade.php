@@ -30,8 +30,8 @@
         <div class="form-group">
             <label>Name:</label>
                  {!! Form::text('serviceName', null, ['class' => 'form-control','required','placeholder'=>'Enter service name']) !!}
-            @if ($errors->has('name'))
-                <span class="text-danger">{{ $errors->first('name') }}</span>
+            @if ($errors->has('serviceName'))
+                <span class="text-danger">{{ $errors->first('serviceName') }}</span>
             @endif
         </div>
 
