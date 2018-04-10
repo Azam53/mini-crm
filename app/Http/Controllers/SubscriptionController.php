@@ -7,6 +7,8 @@ use App\Subscription;
 use App\Service;
 use App\Http\Requests\StoreSubscription;
 use Validator;
+use App\Events\Subscribed;
+use Event;
 
 class SubscriptionController extends Controller
 {
@@ -99,6 +101,10 @@ class SubscriptionController extends Controller
            // dd($input);
 
             $subscription = Subscription::create($input);
+
+             // fire event for subscription added
+           // Event::fire(new Subscribed($subscription));
+
             return redirect('/subscription')->with('success','Subscription created successfully.');
 
       }catch(\Exception $e) {

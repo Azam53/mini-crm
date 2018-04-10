@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Service;
+use App\Subscription;
 
 class DashboardController extends Controller
 {
@@ -14,7 +15,7 @@ class DashboardController extends Controller
        // to get the total of all entities in the system 
     	     $companies = Company::count();
     	     $services  = Service::count();
-    	     $subscription = 0;
+    	     $subscription = Subscription::count();
 
 		     return view('dashboard.index')->with('company_total',$companies)->with('services_total',$services)->with('subscription_total',$subscription);
 	}
