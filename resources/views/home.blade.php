@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! <br> 
+
+                       @if(Auth::user()->role == 1) 
+                           <a href="{{url('dashboard')}}">Click Proceed to dashboard </a>
+                       @else
+                           <a href="{{url('admindashboard')}}">Click Proceed to dashboard </a>
+                       @endif
+
                 </div>
             </div>
         </div>

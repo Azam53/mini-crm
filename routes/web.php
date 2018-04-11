@@ -24,11 +24,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// route for crm operations and protected by middleware for only registered user
-Route::group(['middleware' => 'auth.basic'], function()
+
+// route for crm operations and protected by middleware for only registered super admin user
+Route::group(['middleware' => ['auth.basic','is-superadmin']], function()
 {
-	 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-     Route::resource('company', 'CompanyController'); 
+     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+     Route::resource('company', 'CompanyController');
      Route::get('searchajax',array('as'=>'searchajax','uses'=>'CompanyController@autoComplete'));
 
      //auto complete routes for service and company
@@ -36,9 +37,23 @@ Route::group(['middleware' => 'auth.basic'], function()
      Route::get('searchservice',array('as'=>'searchservice','uses'=>'ServiceController@autoCompleteService'));
 
      //Services route
-     Route::resource('service', 'ServiceController'); 
+     Route::resource('service', 'ServiceController')->middleware(['is-superadmin']); 
      //Subscription route
-     Route::resource('subscription', 'SubscriptionController');  
+     Route::resource('subscription', 'SubscriptionController')->middleware(['is-superadmin']);  
 
         
 });
+
+// route for crm operations and protected by middleware for only registered  admin user of single company
+Route::group(['middleware' => ['auth.basic','is-admin']], function()
+{
+     Route::get('/admindashboard', 'DashboardController@index')->name('dashboard');
+     Route::resource('admincompany', 'AdminCompanyController');
+     Route::get('adminsearchajax',array('as'=>'searchajax','uses'=>'CompanyController@autoComplete'));
+
+        
+});
+
+
+
+

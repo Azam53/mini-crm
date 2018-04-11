@@ -127,3 +127,13 @@ $(function() {
                     });
              
                   });    
+
+
+// for adding rate column in service form
+
+  $(function() {
+       $("#addrate").click(function(){
+               $("#rate").removeClass("hidden");
+               $('#addrate').remove();
+        });
+  });

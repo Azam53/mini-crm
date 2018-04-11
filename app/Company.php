@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Events\CompanyNotification;
 
 class Company extends Model
 {
@@ -14,5 +15,9 @@ class Company extends Model
     {
      	return $this->hasMany('App\Subscription', 'companyId');
     }
+
+     protected $dispatchesEvents = [
+        'created' => CompanyNotification::class,
+    ];
     
 }

@@ -27,7 +27,7 @@ class StoreService extends FormRequest
                 'serviceName' => 'required|min:5|max:15',
                 'price' => 'required',
                 'description' => 'required',
-                'rate' => 'required',
+                'vat' => 'required',
         ];
     }
 }
