@@ -37,9 +37,16 @@ Route::group(['middleware' => ['auth.basic','is-superadmin']], function()
      Route::get('searchservice',array('as'=>'searchservice','uses'=>'ServiceController@autoCompleteService'));
 
      //Services route
-     Route::resource('service', 'ServiceController')->middleware(['is-superadmin']); 
+     Route::resource('service', 'ServiceController');
      //Subscription route
-     Route::resource('subscription', 'SubscriptionController')->middleware(['is-superadmin']);  
+     Route::resource('subscription', 'SubscriptionController');  
+
+     //Admin settings
+     Route::get('setting', 'SettingController@index');
+     Route::get('addsetting', 'SettingController@create');
+     Route::post('storesetting',['as' => 'setting.store','uses' => 'SettingController@store']);
+     Route::get('deletesetting/{id}', 'SettingController@destroy'); 
+     Route::get('editsetting/{id}', 'SettingController@edit'); 
 
         
 });
