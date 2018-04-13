@@ -52,9 +52,23 @@
             @endif
         </div>
 
-         <div class="form-group">
-            <label>Rate:</label>
-            {!! Form::number('rate',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter rate')) !!}
+         <div class="form-group ">
+            <label>Vat %:</label>
+            {!! Form::select('vat',[21 => 21,6 => 6,0 => 0],null, array('class'=>'form-control','required' )) !!}
+            @if ($errors->has('vat'))
+                <span class="text-danger">{{ $errors->first('vat') }}</span>
+            @endif
+        </div>
+
+        <div class="form-group">
+                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="addrate">
+                       Add Rate
+                </button>
+        </div>        
+
+         <div class="form-group hidden" id="rate">
+            <label>Rate / hour:</label>
+            {!! Form::number('rate',null, array('class'=>'form-control','placeholder'=>'Enter rate')) !!}
             @if ($errors->has('rate'))
                 <span class="text-danger">{{ $errors->first('rate') }}</span>
             @endif

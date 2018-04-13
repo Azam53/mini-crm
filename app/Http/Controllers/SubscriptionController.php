@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Subscription;
 use App\Service;
+use App\Setting;
 use App\Http\Requests\StoreSubscription;
 use Validator;
 use App\Events\Subscribed;
@@ -94,11 +95,24 @@ class SubscriptionController extends Controller
     public function store(StoreSubscription $request){
 
       try{
-        
+             
+            $defaultDiscount = Setting::count();
+
             $input = $request->all();
             $input['startDate'] = date("Y-m-d",strtotime($request->startDate)) ;
             $input['endDate'] = date("Y-m-d",strtotime($request->endDate));
-           // dd($input);
+
+            // to check default discount
+            if (!empty($defaultDiscount) && $defaultDiscount > 0) {
+              
+                 $discountPercentage = Setting::all('discountRule');
+                 $discountPercentage =  $discountPercentage[0]->discountRule;
+                 
+                 $discount = $discountPercentage + $request->discount;
+
+                 $input['discount']  = $discount;
+            }
+
 
             $subscription = Subscription::create($input);
 

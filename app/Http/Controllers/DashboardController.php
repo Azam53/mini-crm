@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Service;
 use App\Subscription;
+use Auth;
 
 class DashboardController extends Controller
 {

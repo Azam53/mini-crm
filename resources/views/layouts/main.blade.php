@@ -284,19 +284,34 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+
+                     @if(Auth::check() && Auth::user()->role == 1) 
                         <li>
                             <a href="{{url('dashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
+                        </li>  
                         <li>
                             <a href="{{url('company')}}"><i class="fa fa-building fa-fw"></i> Companies</a>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                         <li>
                             <a href="{{url('service')}}"><i class="fa fa-table fa-fw"></i> Services</a>
                         </li>
                         <li>
                             <a href="{{url('subscription')}}"><i class="fa fa-random fa-fw"></i> Subcriptions</a>
                         </li>
+                         <li>
+                            <a href="{{url('setting')}}"><i class="fa fa-sliders fa-fw"></i> Settings</a>
+                        </li>
+                     @else
+                        <li>
+                            <a href="{{url('admindashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li> 
+                         <li>
+                            <a href="{{url('admincompany')}}"><i class="fa fa-building fa-fw"></i> Companies</a>
+                            <!-- /.nav-second-level -->
+                        </li>
+                     @endif   
+                       
                        
                         
                           
