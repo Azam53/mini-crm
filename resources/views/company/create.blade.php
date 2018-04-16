@@ -62,7 +62,7 @@
 
          <div class="form-group">
             <label>Country:</label>
-             {!! Form::text('country', null, array('placeholder' => 'Search Text','class' => 'form-control','id'=>'search_text')) !!}
+             {!! Form::text('country', null, array('placeholder' => 'Search Country','class' => 'form-control','id'=>'search_text')) !!}
             @if ($errors->has('country'))
                 <span class="text-danger">{{ $errors->first('country') }}</span>
             @endif
@@ -76,21 +76,21 @@
         </div>
          <div class="form-group">
             <label>Email:</label>
-             {!! Form::text('email',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
+             {!! Form::text('email',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Email')) !!}
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
         </div>
         <div class="form-group">
             <label>Website:</label>
-             {!! Form::text('url',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
+             {!! Form::text('url',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Website')) !!}
             @if ($errors->has('url'))
                 <span class="text-danger">{{ $errors->first('url') }}</span>
             @endif
         </div>
          <div class="form-group">
             <label>Bank Number:</label>
-             {!! Form::text('bankNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
+             {!! Form::text('bankNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Bank Number')) !!}
             @if ($errors->has('bankNumber'))
                 <span class="text-danger">{{ $errors->first('bankNumber') }}</span>
             @endif

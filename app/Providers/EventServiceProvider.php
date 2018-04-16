@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
          'App\Events\CompanyNotification' => [
             'App\Listeners\NewCompanyAdded',
         ],
+         'App\Events\QuoteMail' => [
+            'App\Listeners\QuoteMailFired',
+        ],
     ];
 
     /**

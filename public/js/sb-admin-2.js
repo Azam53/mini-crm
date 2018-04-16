@@ -137,3 +137,20 @@ $(function() {
                $('#addrate').remove();
         });
   });
+
+// to add prices for quote form in company module
+
+   $(function() {
+       $(".quotePrice").click(function(){
+               
+               var price = 0;
+
+               $('input.quotePrice:checkbox:checked').each(function () {
+                price = parseInt(price) + parseInt($(this).attr('price'));
+               });
+             
+               $('#total').val(price);
+        });
+
+
+  });

@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Country;
 use App\Company;
+use App\Service;
+use App\Quote;
 use App\Http\Requests\StoreCompany;
+use App\Http\Requests\QuoteCheck;
 use Validator;
+use App\Events\QuoteMail;
+use Event;
+use DB;
 
 class CompanyController extends Controller
 {
@@ -194,6 +200,91 @@ class CompanyController extends Controller
 
       
 
+    }
+
+     // function to show quote form
+     public function quote($id){
+
+        try{
+               //dd($id);
+             $services = Service::all();
+             $companyId = $id;
+
+            return view('company.quote')->with('services',$services)->with('companyId',$companyId);
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+        }
+
+        
+    }
+
+
+     // function to send quote 
+     public function sendQuote(QuoteCheck $request){
+
+        try{
+               
+              
+            $services = Service::whereIn('id',$request->services)->get();
+            $total    = $request->total;
+            $companyId = $request->companyId;
+
+            $company = Company::where('id',$companyId)->get();
+
+            $email = $company[0]->email;
+
+            // code to save the quote details in database
+
+            $input = $request->all();
+            $input['companyId'] = $companyId;
+            $input['total'] = $total;
+            $input['services'] = json_encode($request->services);
+
+            $quote = Quote::create($input);
+
+            $quoteId = $quote->id;
+
+            /* Here we can't use callbacks from model since I need some dynamic content which is required in email */
+
+             // fire event for subscription added
+            Event::fire(new QuoteMail($services,$total,$email,$quoteId));
+
+             return redirect('/company')->with('success','Quote sended successfully.');
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+        }
+
+        
+    }
+
+     // function to show quote form step2
+     public function showQuote($id){
+
+        try{
+               
+                $quote = Quote::find($id);
+
+                $services =  json_decode($quote->services);
+
+                $services = Service::whereIn('id',$services)->get();
+
+             return view('company.quoteChat')->with('quote',$quote)->with('services',$services);
+
+           
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+        }
+
+        
     }
 
 

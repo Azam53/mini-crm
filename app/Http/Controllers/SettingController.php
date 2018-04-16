@@ -43,6 +43,22 @@ class SettingController extends Controller
 
     }
 
+     public function edit($id){
+
+        try{
+
+            $setting = Setting::find($id);
+
+            return view('setting.edit')->with('setting',$setting);
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+      }
+      
+    }
+
 
      // function for creating new settings
     public function store(StoreSettings $request){
@@ -61,6 +77,29 @@ class SettingController extends Controller
 
       }
     	
+
+    }
+
+
+    // function for updating existing companies
+    public function update(StoreSettings $request,$id){
+          
+        try{
+                   
+                $service = Setting::find($id);   
+              
+                $service->update($request->toArray());
+                
+                
+                return redirect('/setting')->with('success','Setting edited successfully.');
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+      }
+        
+
 
     }
 
