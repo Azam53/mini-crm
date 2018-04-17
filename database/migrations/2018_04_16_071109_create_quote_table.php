@@ -21,6 +21,7 @@ class CreateQuoteTable extends Migration
             $table->integer('depth')->nullable();
             $table->enum('subscribedStatus', ['0', '1'])->nullable();
             $table->integer('total');
+            $table->integer('role');
 
               //adding foreign key
             $table->integer('companyId')->unsigned()->nullable(); 

@@ -8,12 +8,16 @@ use App\Country;
 use App\Company;
 use App\Service;
 use App\Quote;
+use App\Subscription;
+use App\Setting;
 use App\Http\Requests\StoreCompany;
 use App\Http\Requests\QuoteCheck;
+use App\Http\Requests\StoreSubscription;
 use Validator;
 use App\Events\QuoteMail;
 use Event;
 use DB;
+use Auth;
 
 class CompanyController extends Controller
 {
@@ -241,6 +245,7 @@ class CompanyController extends Controller
             $input = $request->all();
             $input['companyId'] = $companyId;
             $input['total'] = $total;
+            $input['role'] = Auth::user()->role;
             $input['services'] = json_encode($request->services);
 
             $quote = Quote::create($input);
@@ -274,7 +279,11 @@ class CompanyController extends Controller
 
                 $services = Service::whereIn('id',$services)->get();
 
-             return view('company.quoteChat')->with('quote',$quote)->with('services',$services);
+                // to fetch all comments from quote
+
+                $comments = Quote::where('depth', $id)->get();
+
+        return view('company.quoteChat')->with('quote',$quote)->with('services',$services)->with('comments',$comments)->with('service_array',$quote->services);
 
            
 
@@ -286,6 +295,89 @@ class CompanyController extends Controller
 
         
     }
+
+
+     // function to show quote form step2
+     public function storeChat(QuoteCheck $request){
+
+        try{
+
+                 $input = $request->all();
+                 $input['role'] = Auth::user()->role;
+
+                 $quote = Quote::create($input);
+               
+
+            // return view('company.quoteChat')->with('quote',$quote)->with('services',$services);
+
+           return redirect()->back()->with('success','Comment saved successfully.');
+           
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+        }
+
+        
+    }
+
+
+    // function to subscribed quote services
+     public function subscribedChat(Request $request){
+
+        try{
+                $defaultDiscount = Setting::count();
+
+                $input = $request->all();
+
+                $services =  json_decode($request->services);
+
+                foreach($services as $serviceId) {
+                   
+                    $input['serviceId'] = $serviceId;
+                    $input['startDate'] = date("Y-m-d",strtotime('now')) ;
+                    $input['endDate'] = date("Y-m-d",strtotime('+1 year'));
+                    $input['recurring'] = 0;
+                    $input['rate'] = '0';
+                    $input['description'] = "This subscription is from Quotation chat";
+
+                    // to check default discount
+
+                    if (!empty($defaultDiscount) && $defaultDiscount > 0) {
+              
+                         $discountPercentage = Setting::all('discountRule');
+                         $discountPercentage =  $discountPercentage[0]->discountRule;
+                         
+                         $discount = $discountPercentage + 0;
+
+                         $input['discount']  = $discount;
+                    }
+                    
+                      
+                     $subscription = Subscription::create($input);
+                }
+
+                $quote = Quote::find($request->quoteId);
+
+                $quote->subscribedStatus = '1' ;
+
+                $quote->save();
+
+
+           return redirect('/company')->with('success','Quote got subscribed successfully.');
+           
+
+        }catch(\Exception $e) {
+
+            return redirect()->back()->with('failed','This error ocurred.'.$e->getMessage());
+
+        }
+
+        
+    }
+
+
 
 
 

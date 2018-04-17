@@ -43,7 +43,7 @@
                                                 </div>
 
                                                  <div class="form-group">
-                                                          {!! Form::submit('ADD', array('class'=>'btn btn-success btn-submit')) !!}
+                                                          {!! Form::submit('SAVE', array('class'=>'btn btn-success btn-submit')) !!}
             
                                                  </div>
 
