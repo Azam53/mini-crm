@@ -18,7 +18,7 @@ class IsAdminMiddleware
     {
         // check for superadmin 
         // dd(Auth::guard('web')->check());
-        if((Auth::guard('web')->check() && Auth::user()->role == '2')){
+        if((Auth::guard('web')->check() && Auth::user()->role == '2') || (Auth::guard('web')->check() && Auth::user()->role == '1')){
 
                return $next($request);
 

@@ -45,8 +45,14 @@ Route::group(['middleware' => ['auth.basic','is-superadmin']], function()
      Route::get('setting', 'SettingController@index');
      Route::get('addsetting', 'SettingController@create');
      Route::post('storesetting',['as' => 'setting.store','uses' => 'SettingController@store']);
+     Route::put('updatesetting/{id}',['as' => 'setting.update','uses' => 'SettingController@update']);
      Route::get('deletesetting/{id}', 'SettingController@destroy'); 
      Route::get('editsetting/{id}', 'SettingController@edit'); 
+
+     // Quotation sending for company
+     Route::get('quotation/{id}','CompanyController@quote');
+     //Route::get('showQuotation/{id}','CompanyController@showQuote');
+     Route::post('sendQuote',['as' => 'quote.send','uses' => 'CompanyController@sendQuote']);
 
         
 });
@@ -57,6 +63,15 @@ Route::group(['middleware' => ['auth.basic','is-admin']], function()
      Route::get('/admindashboard', 'DashboardController@index')->name('dashboard');
      Route::resource('admincompany', 'AdminCompanyController');
      Route::get('adminsearchajax',array('as'=>'searchajax','uses'=>'CompanyController@autoComplete'));
+     
+     // showing quotation for company admin 
+     Route::get('showQuotation/{id}','CompanyController@showQuote');
+
+     Route::post('storeComment',['as' => 'store.comment','uses' => 'CompanyController@storeChat']);
+
+     // subscription from quote chat
+
+     Route::post('subscribed',['as' => 'quote.subscribed','uses' => 'CompanyController@subscribedChat']);
 
         
 });

@@ -57,10 +57,14 @@
                                                         {{ Form::close() }}
                                                         </span>
                                                         <span class="pull-left company">
+                                                         <a href="quotation/{{$company->id}}"><button class="btn btn-info" > Quoatation </button></a>
+                                                        </span>
+                                                        <span class="pull-left company">
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['company.destroy', $company->id]]) }}
                                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger','title' => 'delete']) }}
                                                         {{ Form::close() }}
                                                         <span>
+
                                                     </td>
                                                 </tr>
                                             @endforeach    
