@@ -15,6 +15,7 @@ use App\Http\Requests\QuoteCheck;
 use App\Http\Requests\StoreSubscription;
 use Validator;
 use App\Events\QuoteMail;
+use App\Events\ChatNotification;
 use Event;
 use DB;
 use Auth;
@@ -306,9 +307,12 @@ class CompanyController extends Controller
                  $input['role'] = Auth::user()->role;
 
                  $quote = Quote::create($input);
+
+                 $quoteId = $request->depth;
                
 
-            // return view('company.quoteChat')->with('quote',$quote)->with('services',$services);
+             // fire event for comments added
+            Event::fire(new ChatNotification($quoteId));
 
            return redirect()->back()->with('success','Comment saved successfully.');
            

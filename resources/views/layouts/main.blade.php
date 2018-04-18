@@ -18,6 +18,9 @@
     <!-- MetisMenu CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.4/metisMenu.css" rel="stylesheet">
 
+    <!-- Datatable CSS -->
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
      <link href="/css/custom.css" rel="stylesheet">
@@ -252,7 +255,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} </a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -350,6 +353,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.4/metisMenu.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" ></script>
+
+     <!-- datatable js -->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <!-- Morris Charts JavaScript 
     <script src="../vendor/raphael/raphael.min.js"></script>

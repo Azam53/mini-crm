@@ -53,6 +53,14 @@
         </div>
 
          <div class="form-group">
+            <label>End Date:</label>
+             {{ Form::text('endDate', $subscription->endDate, array('id' => 'datepicker_end','class' => 'form-control')) }}
+            @if ($errors->has('endDate'))
+                <span class="text-danger">{{ $errors->first('endDate') }}</span>
+            @endif
+        </div>
+
+         <div class="form-group">
             <label>Start Date:</label>
              {{ Form::text('startDate', $subscription->startDate, array('id' => 'datepicker_start','class' => 'form-control')) }}
             @if ($errors->has('startDate'))
@@ -60,13 +68,6 @@
             @endif
         </div>
 
-         <div class="form-group">
-            <label>End Date:</label>
-             {{ Form::text('endDate', $subscription->endDate, array('id' => 'datepicker_end','class' => 'form-control')) }}
-            @if ($errors->has('endDate'))
-                <span class="text-danger">{{ $errors->first('endDate') }}</span>
-            @endif
-        </div>
 
         <div class="form-group">
             <label>Rate:</label>

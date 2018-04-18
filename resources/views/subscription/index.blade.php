@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
+                                        <table id="subscribe" class="display">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -48,9 +48,13 @@
                                             </thead>
                                             <tbody>
 
+                                        @if(count($subsciptions) > 0)         
+
+                                            @php $counter = 1 @endphp     
+
                                             @foreach($subsciptions as $subscription)    
                                                 <tr>
-                                                    <td>{{ $subscription->id }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $subscription->name }}</td>
                                                     <td>{{ $subscription->serviceName }}</td>
                                                     <td><span class="pull-left subscription">
@@ -71,7 +75,16 @@
                                                         <span>
                                                     </td>
                                                 </tr>
-                                            @endforeach    
+ 
+                                             @php $counter++ @endphp
+
+                                            @endforeach 
+                                        @else
+                                                <tr>
+                                                       <td colspan="4"><center>No records found</center></td>
+
+                                                </tr>    
+                                        @endif            
                                                
                                             </tbody>
                                         </table>

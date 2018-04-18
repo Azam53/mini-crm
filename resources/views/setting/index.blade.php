@@ -47,9 +47,11 @@
                                             </thead>
                                             <tbody>
 
+                                            @php $counter = 1 @endphp      
+
                                             @foreach($settings as $setting)    
                                                 <tr>
-                                                    <td>{{ $setting->id }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $setting->discountRule }}</td>
                                                     <td>
                                                         <a href="/editsetting/{{$setting->id}}"><button type="button" class="btn btn-primary">Edit</button></a>
@@ -57,6 +59,9 @@
                                                     </td>
                                                     
                                                 </tr>
+                                           
+                                            @php $counter++ @endphp
+
                                             @endforeach    
                                                
                                             </tbody>
