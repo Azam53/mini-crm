@@ -39,15 +39,15 @@
                                    
                                    Service Name : {{ $subscription->serviceName }}<br>
 
-                                   Start date   : {{ $subscription->startDate }}<br>
+                                   Start date   : {{ date('d M Y',strtotime($subscription->startDate)) }}<br>
 
-                                   End date     : {{ $subscription->endDate }}<br>
+                                   End date     : {{ date('d M Y',strtotime($subscription->endDate)) }}<br>
 
                                    Price        : {{ $subscription->price }}<br>
  
-                                   Rate         : {{ $subscription->rate}}<br>
+                                   Rate         : {{ (!empty($subscription->rate))? $subscription->rate : 0}}<br>
 
-                                   Discount     : {{ $subscription->discount }}<br>
+                                   Discount     : {{ $subscription->discount }}%<br>
 
                                    @endforeach
                                     <!-- /.table-responsive -->

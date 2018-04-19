@@ -24,8 +24,8 @@ class StoreSubscription extends FormRequest
     public function rules()
     {
         return [
-                'companyId' => 'required',
-                'serviceId' => 'required',
+                'companyId' => 'required|numeric',
+                'serviceId' => 'required|numeric',
                 'recurring' => 'required',
                 'startDate' => 'required|date',
                 'endDate'   => 'required|date',

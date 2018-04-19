@@ -25,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
          'App\Events\QuoteMail' => [
             'App\Listeners\QuoteMailFired',
         ],
+        'App\Events\ChatNotification' => [
+            'App\Listeners\ChatMailFired',
+        ],
     ];
 
     /**

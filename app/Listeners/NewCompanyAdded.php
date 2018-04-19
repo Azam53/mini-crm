@@ -30,12 +30,6 @@ class NewCompanyAdded
     {
         $company = Company::find($event->company)->toArray();
 
-        // Mail::raw('Subscription successfull', $company, function($message) use ($company) {
-        //     //$message->to($user['email']);
-        //     $message->to('azam@infris.nl');
-        //     $message->subject('Company notification');
-        // });
-
         Mail::raw('Success company added', function ($message) {
                  $message->to('azam@infris.nl')->subject('Company notification');
         });

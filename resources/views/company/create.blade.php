@@ -22,13 +22,15 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8">
+
+                                            <span class="label label-warning pull-right">All fields are mandatory</span>
                                     
     {!! Form::open(array('route' => 'company.store', 'class' => 'form', 'action' => 'post' ,'autocomplete' => 'off')) !!}
 
 
         {{ csrf_field() }}
         <div class="form-group">
-            <label>Name:</label>
+            <label>Name *:</label>
                  {!! Form::text('name', null, ['class' => 'form-control','required','placeholder'=>'Enter Company name']) !!}
             @if ($errors->has('name'))
                 <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -36,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label>Address:</label>
+            <label>Address *:</label>
                  {!! Form::textarea('address',null, ['class' => 'form-control' ,'required']) !!}
             @if ($errors->has('address'))
                 <span class="text-danger">{{ $errors->first('address') }}</span>
@@ -45,7 +47,7 @@
 
 
         <div class="form-group">
-            <label>Postal code:</label>
+            <label>Postal code * :</label>
              {!! Form::text('postalCode',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Postal Code')) !!}
             @if ($errors->has('postalCode'))
                 <span class="text-danger">{{ $errors->first('postalCode') }}</span>
@@ -53,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            <label>Province:</label>
+            <label>Province * :</label>
              {!! Form::text('province',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
             @if ($errors->has('province'))
                 <span class="text-danger">{{ $errors->first('province') }}</span>
@@ -61,36 +63,36 @@
         </div>
 
          <div class="form-group">
-            <label>Country:</label>
+            <label>Country * :</label>
              {!! Form::text('country', null, array('placeholder' => 'Search Country','class' => 'form-control','id'=>'search_text')) !!}
             @if ($errors->has('country'))
                 <span class="text-danger">{{ $errors->first('country') }}</span>
             @endif
         </div>
         <div class="form-group">
-            <label>Contact:</label>
-             {!! Form::text('contactNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Contact number')) !!}
+            <label>Contact * :</label>
+             {!! Form::text('contactNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Contact number (eg : 7021720789)')) !!}
             @if ($errors->has('contactNumber'))
                 <span class="text-danger">{{ $errors->first('contactNumber') }}</span>
             @endif
         </div>
          <div class="form-group">
-            <label>Email:</label>
+            <label>Email * :</label>
              {!! Form::text('email',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Email')) !!}
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
         </div>
         <div class="form-group">
-            <label>Website:</label>
+            <label>Website * :</label>
              {!! Form::text('url',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Website')) !!}
             @if ($errors->has('url'))
                 <span class="text-danger">{{ $errors->first('url') }}</span>
             @endif
         </div>
          <div class="form-group">
-            <label>Bank Number:</label>
-             {!! Form::text('bankNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Bank Number')) !!}
+            <label>Bank Number * :</label>
+             {!! Form::text('bankNumber',null, array('class'=>'form-control','required','maxlength'=> '20' ,'placeholder'=>'Enter Bank Number (eg : NL91ABNA0417164300)')) !!}
             @if ($errors->has('bankNumber'))
                 <span class="text-danger">{{ $errors->first('bankNumber') }}</span>
             @endif

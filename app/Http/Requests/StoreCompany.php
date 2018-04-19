@@ -24,12 +24,12 @@ class StoreCompany extends FormRequest
     public function rules()
     {
         return [
-               'name' => 'required|min:5|max:15',
+               'name' => 'required|min:5|max:15|unique:companies,name,'. $this->company,
                 'address' => 'required',
                 'postalCode' => 'required',
                 'province' => 'required',
                 'country' => 'required',
-                'contactNumber' => 'required|min:9|max:10',
+                'contactNumber' => 'required|size:10',
                 'email' => 'required|min:5|max:60|email|unique:companies,email,'. $this->company,
                 'url' => 'required',
                 'bankNumber' => 'required|min:14|max:20',

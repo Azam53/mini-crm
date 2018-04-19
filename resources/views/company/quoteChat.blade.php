@@ -17,6 +17,16 @@
                         <div class="panel-heading">
                             <i class="fa fa-building fa-fw"></i> Send quote to company
                         </div>
+
+
+                        @if(Session::has('success'))
+                            <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                            @php
+                            Session::forget('success');
+                            @endphp
+                            </div>
+                        @endif
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
@@ -98,7 +108,16 @@
          @if($quote->subscribedStatus == 0)
           <div class="form-group">
 
-               <span class='label label-info label-as-badge pull-left'>Customer</span><br>
+               @if(( Auth::check() && Auth::user()->name )) 
+
+                    @if( Auth::user()->name == 'Admin')  
+                      <span class='label label-info label-as-badge pull-left'>Customer</span><br>
+                    @else
+                      <span class='badge badge-primary pull-left'>SuperAdmin</span><br>
+                    @endif    
+               @else
+                      <span class='label label-info label-as-badge pull-left'>Customer</span><br>
+               @endif
             
                  {!! Form::textarea('comments', null, ['class' => 'form-control','required']) !!}
 

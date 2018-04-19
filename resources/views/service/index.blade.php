@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
+                                        <table  id="service" class="display">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -47,9 +47,13 @@
                                             </thead>
                                             <tbody>
 
+                                        @if(count($services) > 0)        
+
+                                            @php $counter = 1 @endphp    
+
                                             @foreach($services as $service)    
                                                 <tr>
-                                                    <td>{{ $service->id }}</td>
+                                                    <td>{{ $counter }}</td>
                                                     <td>{{ $service->serviceName }}</td>
                                                     <td><span class="pull-left service">
                                                         {{ Form::open(['method' => 'GET','route' => ['service.edit', $service->id]]) }}
@@ -63,7 +67,16 @@
                                                         <span>
                                                     </td>
                                                 </tr>
-                                            @endforeach    
+                                            
+                                            @php $counter++ @endphp  
+
+                                            @endforeach   
+                                        @else
+                                                <tr>
+                                                       <td colspan="3"><center>No records found</center></td>
+
+                                                </tr>    
+                                        @endif     
                                                
                                             </tbody>
                                         </table>

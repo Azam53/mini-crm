@@ -154,3 +154,25 @@ $(function() {
 
 
   });
+
+
+ // for adding datatable for service
+ 
+ $(document).ready(function() {
+    
+    $('#service').DataTable({
+
+        "order": [[ 0, "desc" ]]
+    });
+
+    $('#company').DataTable({
+
+        "order": [[ 0, "desc" ]]
+    });
+
+     $('#subscribe').DataTable({
+
+        "order": [[ 0, "desc" ]]
+    });
+
+} );  
