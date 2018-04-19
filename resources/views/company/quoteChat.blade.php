@@ -108,8 +108,13 @@
          @if($quote->subscribedStatus == 0)
           <div class="form-group">
 
-               @if($quote->role == 1)
+               @if(( Auth::check() && Auth::user()->name )) 
+
+                    @if( Auth::user()->name == 'Admin')  
+                      <span class='label label-info label-as-badge pull-left'>Customer</span><br>
+                    @else
                       <span class='badge badge-primary pull-left'>SuperAdmin</span><br>
+                    @endif    
                @else
                       <span class='label label-info label-as-badge pull-left'>Customer</span><br>
                @endif

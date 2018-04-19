@@ -49,7 +49,7 @@
 
                                             
                                                 <tr>
-                                                    <td>{{ $company->id }}</td>
+                                                    <td>1</td>
                                                     <td>{{ $company->name }}</td>
                                                     <td><span class="pull-left company">
                                                         {{ Form::open(['method' => 'GET','route' => ['admincompany.edit', $company->id]]) }}
