@@ -108,7 +108,7 @@
          @if($quote->subscribedStatus == 0)
           <div class="form-group">
 
-               @if($comment->role == 1)
+               @if($quote->role == 1)
                       <span class='badge badge-primary pull-left'>SuperAdmin</span><br>
                @else
                       <span class='label label-info label-as-badge pull-left'>Customer</span><br>
