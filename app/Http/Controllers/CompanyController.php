@@ -258,7 +258,7 @@ class CompanyController extends Controller
              // fire event for subscription added
             Event::fire(new QuoteMail($services,$total,$email,$quoteId));
 
-             return redirect('/company')->with('success','Quote sended successfully.');
+             return redirect('/company')->with('success','Quote sent successfully.');
 
         }catch(\Exception $e) {
 

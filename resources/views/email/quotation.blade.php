@@ -16,10 +16,12 @@
 
      @endforeach   
 
-     <br><b>The totat cost:: {{$total}} &euro;</b><br>  
+     <br><b>The totat cost:: {{$total}} &euro;</b><br><br>
 
 
-     <a href='http://localhost:8000/showQuotation/{{$quoteId}}'> click on the below link to show interest  </a>
+    <!-- <a href='https://minicrm.staging-server.nl/showQuotation/{{$quoteId}}'> click on the below link to show interest  </a>-->
+
+     <a href="{{URL::to('/')}}/showQuotation/{{ $quoteId }}">click here to go ahead</a>
 
 
 
