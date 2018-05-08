@@ -30,7 +30,7 @@
 
         {{ csrf_field() }}
         <div class="form-group">
-            <label>Name *:</label>
+            <label>Name * :</label>
                  {!! Form::text('name', null, ['class' => 'form-control','required','placeholder'=>'Enter Company name']) !!}
             @if ($errors->has('name'))
                 <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label>Address *:</label>
+            <label>Address * :</label>
                  {!! Form::textarea('address',null, ['class' => 'form-control' ,'required']) !!}
             @if ($errors->has('address'))
                 <span class="text-danger">{{ $errors->first('address') }}</span>

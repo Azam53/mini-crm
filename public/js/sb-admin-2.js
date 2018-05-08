@@ -162,17 +162,29 @@ $(function() {
     
     $('#service').DataTable({
 
-        "order": [[ 0, "desc" ]]
+        "order": [[ 0, "desc" ]],
+
+         "columnDefs": [
+                         { orderable: false, targets: 2 }
+                      ]
     });
 
     $('#company').DataTable({
 
-        "order": [[ 0, "desc" ]]
+        "order": [[ 0, "desc" ]],
+
+        "columnDefs": [
+                         { orderable: false, targets: 2 }
+                      ]
     });
 
      $('#subscribe').DataTable({
 
-        "order": [[ 0, "desc" ]]
+        "order": [[ 0, "desc" ]],
+
+         "columnDefs": [
+                         { orderable: false, targets: 3 }
+                      ]
     });
 
 } );  

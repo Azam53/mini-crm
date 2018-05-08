@@ -22,13 +22,15 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8">
+
+                                     <span class="label label-warning pull-right">All fields are mandatory</span>
                                     
  {!! Form::model($company,array('method' => 'PUT','route' => ['company.update', $company->id], 'class' => 'form','autocomplete' => 'off')) !!}
 
 
         {{ csrf_field() }}
         <div class="form-group">
-            <label>Name:</label>
+            <label>Name * :</label>
                  {!! Form::text('name', null, ['class' => 'form-control','required','placeholder'=>'Enter Company name']) !!}
             @if ($errors->has('name'))
                 <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -36,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label>Address:</label>
+            <label>Address * :</label>
                  {!! Form::textarea('address',null, ['class' => 'form-control' ,'required']) !!}
             @if ($errors->has('address'))
                 <span class="text-danger">{{ $errors->first('address') }}</span>
@@ -45,7 +47,7 @@
 
 
         <div class="form-group">
-            <label>Postal code:</label>
+            <label>Postal code * :</label>
              {!! Form::text('postalCode',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Postal Code')) !!}
             @if ($errors->has('postalCode'))
                 <span class="text-danger">{{ $errors->first('postalCode') }}</span>
@@ -53,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            <label>Province:</label>
+            <label>Province * :</label>
              {!! Form::text('province',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
             @if ($errors->has('province'))
                 <span class="text-danger">{{ $errors->first('province') }}</span>
@@ -61,35 +63,35 @@
         </div>
 
          <div class="form-group">
-            <label>Country:</label>
+            <label>Country * :</label>
              {!! Form::text('country', null, array('placeholder' => 'Search Text','class' => 'form-control','id'=>'search_text')) !!}
             @if ($errors->has('country'))
                 <span class="text-danger">{{ $errors->first('country') }}</span>
             @endif
         </div>
         <div class="form-group">
-            <label>Contact:</label>
+            <label>Contact * :</label>
              {!! Form::text('contactNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Contact number')) !!}
             @if ($errors->has('contactNumber'))
                 <span class="text-danger">{{ $errors->first('contactNumber') }}</span>
             @endif
         </div>
          <div class="form-group">
-            <label>Email:</label>
+            <label>Email * :</label>
              {!! Form::text('email',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
         </div>
         <div class="form-group">
-            <label>Website:</label>
+            <label>Website * :</label>
              {!! Form::text('url',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
             @if ($errors->has('url'))
                 <span class="text-danger">{{ $errors->first('url') }}</span>
             @endif
         </div>
          <div class="form-group">
-            <label>Bank Number:</label>
+            <label>Bank Number * :</label>
              {!! Form::text('bankNumber',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter Province')) !!}
             @if ($errors->has('bankNumber'))
                 <span class="text-danger">{{ $errors->first('bankNumber') }}</span>
