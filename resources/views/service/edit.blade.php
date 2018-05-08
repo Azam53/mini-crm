@@ -22,12 +22,14 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8">
+
+                                     <span class="label label-warning pull-right">All fields are mandatory</span>
                                     
     {!! Form::model($service,array('method' => 'PUT','route' => ['service.update', $service->id], 'class' => 'form')) !!}
 
         {{ csrf_field() }}
         <div class="form-group">
-            <label>Name:</label>
+            <label>Name * :</label>
                  {!! Form::text('serviceName', null, ['class' => 'form-control','required','placeholder'=>'Enter service name']) !!}
             @if ($errors->has('serviceName'))
                 <span class="text-danger">{{ $errors->first('serviceName') }}</span>
@@ -36,7 +38,7 @@
 
 
         <div class="form-group">
-            <label>Price:</label>
+            <label>Price * :</label>
              {!! Form::number('price',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter service price')) !!}
             @if ($errors->has('price'))
                 <span class="text-danger">{{ $errors->first('price') }}</span>
@@ -44,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            <label>Description:</label>
+            <label>Description * :</label>
              {!! Form::textarea('description',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter description')) !!}
             @if ($errors->has('description'))
                 <span class="text-danger">{{ $errors->first('description') }}</span>
@@ -52,7 +54,7 @@
         </div>
 
          <div class="form-group ">
-            <label>Vat %:</label>
+            <label>Vat % * :</label>
             {!! Form::select('vat',[21 => 21,6 => 6,0 => 0],null, array('class'=>'form-control','required' )) !!}
             @if ($errors->has('vat'))
                 <span class="text-danger">{{ $errors->first('vat') }}</span>

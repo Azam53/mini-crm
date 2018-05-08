@@ -79,16 +79,16 @@
         </div>
 
          <div class="form-group">
-            <label>Discount (%) *:</label>
-             {{ Form::text('discount', '', array('class' => 'form-control')) }}
+            <label>Discount (%) :</label>
+             {{ Form::text('discount', '', array('class' => 'form-control','placeholder'=>'Enter discount')) }}
             @if ($errors->has('discount'))
                 <span class="text-danger">{{ $errors->first('discount') }}</span>
             @endif
         </div>
 
         <div class="form-group">
-            <label>Description *:</label>
-             {!! Form::textarea('description',null, array('class'=>'form-control','required' ,'placeholder'=>'Enter description')) !!}
+            <label>Description :</label>
+             {!! Form::textarea('description',null, array('class'=>'form-control','placeholder'=>'Enter description')) !!}
             @if ($errors->has('description'))
                 <span class="text-danger">{{ $errors->first('description') }}</span>
             @endif
